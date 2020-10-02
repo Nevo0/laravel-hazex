@@ -1,0 +1,4 @@
+
+@yield('scriptFooter')
+</body>
+</html>

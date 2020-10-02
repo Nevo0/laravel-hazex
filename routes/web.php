@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+use function App\Http\Controllers\allUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/2', function () {
+    $datap['name'] = "Rafal";
+    $datap['chanel'] = "YouTube";
+
+    return view('.user.home', compact('datap'));
 });
+Route::get('/', [UserController::class, 'allUser']);
