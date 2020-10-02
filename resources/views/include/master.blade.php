@@ -15,7 +15,8 @@
 <body>
   
     @yield('conten')
-    {{$datap['name']}}
+  
+   
 </body>
 @yield('scriptFooter')
 </html>

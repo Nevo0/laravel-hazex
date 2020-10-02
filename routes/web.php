@@ -22,4 +22,7 @@ Route::get('/2', function () {
 
     return view('.user.home', compact('datap'));
 });
-Route::get('/', [UserController::class, 'allUser']);
+Route::get('/', [UserController::class, 'allUsers']);
+Route::get('/user/create', [UserController::class, 'createUser']);
+Route::post('/user/create', [UserController::class, 'seveUser'])->name('createuser');
+Route::get('/user/{iduser}', [UserController::class, 'idUser']);
