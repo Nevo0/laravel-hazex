@@ -18,6 +18,10 @@ class UserController extends Controller
         // ^jesli nie bedzie usera to bedzie błąd^
         $datap['data'] = 123;
         $datap['name'] = "Rafał";
+        $pogoda = \Cache::get('pogoda');
+        $datap['pogoda'] = $pogoda;
+        $datap['pogoda_today'] = $pogoda['today'];
+        $datap['pogoda_tommorow'] = $pogoda['tommorow'];
         dump($datap);
         return view('user.home', compact('datap'));
     }
