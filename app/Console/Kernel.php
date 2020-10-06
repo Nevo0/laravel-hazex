@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         // Commands\getWeather::class,
         '\App\Console\Commands\getWeather', //to nasza nowa komenda 
         '\App\Console\Commands\DailyQuote', //to nasza nowa komenda 
+        '\App\Console\Commands\LogCron', //to nasza nowa komenda 
         // Commands\DailyQuote::class,
     ];
 
@@ -33,6 +34,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('quote:daily')
             ->everyMinute();
         $schedule->command('getWeather:current')
+            ->everyMinute();
+        $schedule->command('log:cron')
             ->everyMinute();
     }
 

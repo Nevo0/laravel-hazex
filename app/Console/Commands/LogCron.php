@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class LogCron extends Command
 {
@@ -41,8 +42,9 @@ class LogCron extends Command
            Write your database logic we bellow:
            Item::create(['name'=>'hello new']);
         */
-        // Log::info("Cron is working fine!");
-        dd('xxx');
+        Log::info("Cron is working fine!");
+
+        // dd('xxx');
         // return 0;
     }
 }
