@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Filesystem\Cache;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,6 +12,7 @@ class UserController extends Controller
 
     function allUsers()
     {
+
         $datap['users'] = User::get();
         $datap['user'] = User::where('email', 'rafal@rafal.pi')->first();
         $datap['user1'] = User::find(2);
@@ -20,8 +22,7 @@ class UserController extends Controller
         $datap['name'] = "Rafał";
         $pogoda = \Cache::get('pogoda');
         $datap['pogoda'] = $pogoda;
-        $datap['pogoda_today'] = $pogoda['today'];
-        $datap['pogoda_tommorow'] = $pogoda['tommorow'];
+
         dump($datap);
         return view('user.home', compact('datap'));
     }
