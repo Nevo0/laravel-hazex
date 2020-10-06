@@ -16,9 +16,9 @@ class Kernel extends ConsoleKernel
         //
         // Commands\LogCron::class,
         // Commands\getWeather::class,
-        '\App\Console\Commands\getWeather', //to nasza nowa komenda 
-        '\App\Console\Commands\DailyQuote', //to nasza nowa komenda 
-        '\App\Console\Commands\LogCron', //to nasza nowa komenda 
+        '\App\Console\Commands\getWeather',
+        '\App\Console\Commands\DailyQuote',
+        '\App\Console\Commands\LogCron',
         // Commands\DailyQuote::class,
     ];
 
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-
+        // $schedule->command('jobexp:warning')->cron('* * * * *');
         $schedule->command('quote:daily')
             ->everyMinute();
         $schedule->command('getWeather:current')
