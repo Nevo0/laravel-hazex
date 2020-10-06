@@ -15,9 +15,10 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         // Commands\LogCron::class,
-        Commands\getWeather::class,
-        // '\App\Console\Commands\getWeather', //to nasza nowa komenda 
-        Commands\DailyQuote::class,
+        // Commands\getWeather::class,
+        '\App\Console\Commands\getWeather', //to nasza nowa komenda 
+        '\App\Console\Commands\DailyQuote', //to nasza nowa komenda 
+        // Commands\DailyQuote::class,
     ];
 
     /**
