@@ -1,7 +1,8 @@
 @extends('include.master')
 
 @section('conten')
-   <h1>Test</h1> 
+
+<h1>Przekazywanie parametru {{$datap['name']}}</h1> 
 @endsection
 
  

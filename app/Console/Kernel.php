@@ -16,8 +16,8 @@ class Kernel extends ConsoleKernel
         //
         // Commands\LogCron::class,
         Commands\getWeather::class,
-        '\App\Console\Commands\getWeather', //to nasza nowa komenda 
-
+        // '\App\Console\Commands\getWeather', //to nasza nowa komenda 
+        // Commands\DailyQuote::class,
     ];
 
     /**
@@ -31,12 +31,16 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         // $schedule->command('log:cron')
         //          ->everyMinute();
-                //  $schedule->call(function () {
-                //   dd('hej');
-                // })->daily();   
-        $schedule->command('getWeather:current') // i od teraz chcemy, żeby
-        ->everyThirtyMinutes() // była uruchamina co 30 minut
-        ->appendOutputTo('/var/log/scheduled_weather.log'); //a komunikaty zapisywała w pliku dziennika;  
+        //  $schedule->call(function () {
+        //   dd('hej');
+        // })->daily();   
+        // $schedule->command('getWeather:current') // i od teraz chcemy, żeby
+        //     ->everyThirtyMinutes() // była uruchamina co 30 minut
+        //     ->appendOutputTo('/home/exppl/domains/piapi.hazex.eu/scheduled_weather.log'); //a komunikaty zapisywała w pliku dziennika;  
+        $schedule->command('quote:daily')
+            ->everyMinute();
+        $schedule->command('getWeather:current')
+            ->everyMinute();
     }
 
     /**
@@ -46,7 +50,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
