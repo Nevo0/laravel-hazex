@@ -21,7 +21,9 @@ class UserController extends Controller
         $datap['data'] = 123;
         $datap['name'] = "Rafał";
         $pogoda = \Cache::get('pogoda');
+        $quotes = \Cache::get('quotes');
         $datap['pogoda'] = $pogoda;
+        $datap['quotes'] = $quotes;
         if (\Cache::has('pogoda')) {
             $datap['pogoda_today'] = $pogoda['today'];
             $datap['pogoda_tommorow'] = $pogoda['tommorow'];

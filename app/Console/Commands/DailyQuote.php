@@ -9,6 +9,7 @@ use App\Models\User as ModelsUser;
 
 use App\Models\User;
 use Illuminate\Foundation\Auth\User as AuthUser;
+use Illuminate\Support\Facades\Cache;
 
 class DailyQuote extends Command
 {
@@ -62,5 +63,7 @@ class DailyQuote extends Command
 
 
         $this->info('Successfully sent daily quote to everyone.');
+        Cache::forget('quotes'); //usuwamy poprzednie
+        Cache::forever('quotes', $quotes); //nowe zapisujemy na zawsze
     }
 }

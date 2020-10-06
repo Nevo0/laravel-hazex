@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         // Commands\LogCron::class,
         Commands\getWeather::class,
         // '\App\Console\Commands\getWeather', //to nasza nowa komenda 
-        // Commands\DailyQuote::class,
+        Commands\DailyQuote::class,
     ];
 
     /**
