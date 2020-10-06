@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+
 
 use function App\Http\Controllers\allUser;
 
@@ -15,6 +17,11 @@ use function App\Http\Controllers\allUser;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
 
 Route::get('/2', function () {
     $datap['name'] = "Rafal";
