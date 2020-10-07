@@ -36,11 +36,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('inspire')
             ->everyMinute()
             ->appendOutputTo(storage_path('storage\log\inspire.log'));
-        // $schedule->command('jobexp:warning')->cron('* * * * *');
+
         $schedule->command('quote:daily')
             ->everyMinute();
-        $schedule->command('getWeather:current')
-            ->everyMinute();
+        // $schedule->command('getWeather:current')
+        //     ->everyMinute();
         $schedule->command('log:cron')
             ->everyMinute();
     }
