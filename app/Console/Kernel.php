@@ -30,6 +30,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // $schedule->command('inspire')
+        //     ->everyMinute()
+        //     ->appendOutputTo(storage_path('logs/inspire.log'));
+        $schedule->command('inspire')
+            ->everyMinute()
+            ->appendOutputTo(storage_path('storage\log\inspire.log'));
         // $schedule->command('jobexp:warning')->cron('* * * * *');
         $schedule->command('quote:daily')
             ->everyMinute();

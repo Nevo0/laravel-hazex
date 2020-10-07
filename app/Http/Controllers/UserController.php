@@ -16,6 +16,8 @@ class UserController extends Controller
         $datap['users'] = User::get();
         $datap['user'] = User::where('email', 'rafal@rafal.pi')->first();
         $datap['user1'] = User::find(2);
+        $datap['user2'] = User::where('name', 'aasdasd')->get();
+
         // $datap['user_id'] = User::findOrFail(3);
         // ^jesli nie bedzie usera to bedzie błąd^
         $datap['data'] = 123;
@@ -37,7 +39,8 @@ class UserController extends Controller
         $datap['users'] = User::get();
         $datap['user'] = User::where('email', 'rafal@rafal.pi')->first();
         $datap['user1'] = User::find(2);
-        // $datap['user_id'] = User::findOrFail($id_user);
+        $datap['user4'] = User::find(2);
+        $datap['user_id'] = User::findOrFail($id_user);
         $datap['data'] = 123;
         $datap['name'] = "Rafał";
         dump($datap);
@@ -48,7 +51,7 @@ class UserController extends Controller
 
         $datap['users'] = User::get();
         $datap['user'] = User::where('email', 'rafal@rafal.pi')->first();
-        $datap['user1'] = User::find(2);
+        $datap['user1'] = User::findOrFail(2);
         // $datap['user_id'] = User::findOrFail($id_user);
         $datap['data'] = 123;
         $datap['name'] = "Rafał";

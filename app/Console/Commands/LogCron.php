@@ -42,6 +42,7 @@ class LogCron extends Command
            Write your database logic we bellow:
            Item::create(['name'=>'hello new']);
         */
+        Log::info(storage_path('logs\inspire.log'));
         Log::info("Cron is working fine!");
 
         // dd('xxx');
