@@ -11,4 +11,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 _gw/
-storage/storage\\log\\inspire.log
+/storage/storage\\log\\inspire.log
+/storage/storage\log\inspire.log
