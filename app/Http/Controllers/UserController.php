@@ -12,6 +12,49 @@ class UserController extends Controller
 
     function allUsers()
     {
+<<<<<<< HEAD
+=======
+        $conferences_arr= [];
+        $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
+        
+
+        try {
+            $conferences = $client->conferences('active');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        try {
+            $conferences_inactive = $client->conferences('inactive');
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        try {
+
+            $sessions_on_demond = $client->conferenceSessions("4096472");   
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        $session=[];
+        try {
+            foreach ($sessions_on_demond as $key => $value) {
+                $session[$key] = $client->conferenceSession($conferences[4]->id, $value->id);
+            }
+           
+        } catch (\Throwable $th) {
+            $session =$th;
+        }
+       
+       
+
+        $datap['conferences_ID'] = $conferences[4]->id;
+        $datap['conferences'] = $conferences[4];
+        $datap['sessions_on_demond'] = $sessions_on_demond;
+        $datap['sessionDE'] = $session[0];
+        $datap['sessionattendeesDE'] = $session[0]->attendees;
+        $datap['conferences_inactiveDE'] = $conferences_inactive;
+>>>>>>> b6660dd9de5d356b2ab7b6f84689a023d274a510
 
         $datap['users'] = User::get();
         $datap['user'] = User::where('email', 'rafal@rafal.pi')->first();
