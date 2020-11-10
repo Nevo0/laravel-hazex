@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ConferencesController;
 use App\Http\Controllers\ConferencesActiveController;
 use App\Http\Controllers\ConferencesInactiveController;
 
@@ -35,6 +36,7 @@ Route::get('/user/create', [UserController::class, 'createUser']);
 Route::post('/user/create', [UserController::class, 'seveUser'])->name('createuser');
 // xxx
 Route::get('/user/{iduser}', [UserController::class, 'idUser']);
+Route::get('/cm', [ConferencesController::class, 'index']);
 Route::get('/cm/a', [ConferencesActiveController::class, 'index']);
 Route::get('/cm/n', [ConferencesInactiveController::class, 'index']);
 Route::get('/cm/check/a', [ConferencesActiveController::class, 'updateClickMetting']);

@@ -95,7 +95,7 @@ class ConferencesActiveController extends Controller
             //throw $th;
         }
        
-       if (true) {
+       if (false) {
         foreach ($conferences as $key => $conference) {
             
             // if (true) {
