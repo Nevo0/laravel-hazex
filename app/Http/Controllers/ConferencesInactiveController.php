@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ConferencesActive;
+use App\Models\ConferencesInactive;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ClickMeetingRestClient;
 
-class ConferencesActiveController extends Controller
+class ConferencesInactiveController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +14,11 @@ class ConferencesActiveController extends Controller
      */
     public function index()
     {
-        $datap['ConferencesActive'] = ConferencesActive::get();
+        $datap['ConferencesInactive'] = ConferencesInactive::get();
         dump($datap);
         return view('cm.home', compact('datap'));
     }
 
-  
     /**
      * Show the form for creating a new resource.
      *
@@ -45,10 +43,10 @@ class ConferencesActiveController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ConferencesActive  $ConferencesActive
+     * @param  \App\Models\ConferencesInactive  $conferencesInactive
      * @return \Illuminate\Http\Response
      */
-    public function show(ConferencesActive $ConferencesActive)
+    public function show(ConferencesInactive $conferencesInactive)
     {
         //
     }
@@ -56,10 +54,10 @@ class ConferencesActiveController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ConferencesActive  $ConferencesActive
+     * @param  \App\Models\ConferencesInactive  $conferencesInactive
      * @return \Illuminate\Http\Response
      */
-    public function edit(ConferencesActive $ConferencesActive)
+    public function edit(ConferencesInactive $conferencesInactive)
     {
         //
     }
@@ -68,10 +66,10 @@ class ConferencesActiveController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ConferencesActive  $ConferencesActive
+     * @param  \App\Models\ConferencesInactive  $conferencesInactive
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ConferencesActive $ConferencesActive)
+    public function update(Request $request, ConferencesInactive $conferencesInactive)
     {
         //
     }
@@ -79,30 +77,30 @@ class ConferencesActiveController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ConferencesActive  $ConferencesActive
+     * @param  \App\Models\ConferencesInactive  $conferencesInactive
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ConferencesActive $ConferencesActive)
+    public function destroy(ConferencesInactive $conferencesInactive)
     {
         //
     }
     public function updateClickMetting(Request $request)
     {
-            $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
+        $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
         try {
-            $conferences = $client->conferences('active');
+            $conferences = $client->conferences('inactive');
         } catch (\Throwable $th) {
             //throw $th;
         }
        
-       if (true) {
+       if (false) {
         foreach ($conferences as $key => $conference) {
             
             // if (true) {
             //     # code...
             //     var_dump($conference->lobby_description);
             // }
-            $ca= new ConferencesActive;
+            $ca= new ConferencesInactive;
             $ca->id_cm = $conference->id;
             $ca->room_type = $conference->room_type;
             $ca->room_pin = $conference->room_pin;
@@ -152,9 +150,9 @@ class ConferencesActiveController extends Controller
             
             // var_dump($conference->starts_at) ;  
         }
-        return redirect('cm/a')->with('status', 'ConferencesActive updated!');
-       }
-       return redirect('cm/a')->with('status', 'ConferencesActive not updated!');
+        return redirect('cm/n')->with('status', 'ConferencesInactive updated!');
+    }
+    return redirect('cm/n')->with('status', 'ConferencesInactive not updated!');
         
         
 
@@ -170,7 +168,5 @@ class ConferencesActiveController extends Controller
         // return redirect()->back()->with('success', 'User has been added successfully');
         // dump($conferences);
         
-        // return view('cm.home', compact('data'));
-        // return redirect()->back()->with('success', 'User has been added successfully');
     }
 }

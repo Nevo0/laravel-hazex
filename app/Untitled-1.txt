@@ -1,0 +1,9 @@
+php artisan make:migration create_conferencesActive_table --create=conferencesActive
+
+php artisan make:migration create_conferencesInactive_table --create=conferencesInactive
+
+php artisan make:migration create_users_table --create=users
+
+php artisan make:migration create_users_table --create=users
+
+php artisan make:migration create_users_table --create=users

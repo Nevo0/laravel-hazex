@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Controllers\ClickMeetingRestClient;
 
 use Illuminate\Http\Request;
 
@@ -12,8 +13,6 @@ class UserController extends Controller
 
     function allUsers()
     {
-<<<<<<< HEAD
-=======
         $conferences_arr= [];
         $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
         
@@ -49,12 +48,11 @@ class UserController extends Controller
        
 
         $datap['conferences_ID'] = $conferences[4]->id;
-        $datap['conferences'] = $conferences[4];
+        $datap['conferences'] = $conferences;
         $datap['sessions_on_demond'] = $sessions_on_demond;
         $datap['sessionDE'] = $session[0];
         $datap['sessionattendeesDE'] = $session[0]->attendees;
         $datap['conferences_inactiveDE'] = $conferences_inactive;
->>>>>>> b6660dd9de5d356b2ab7b6f84689a023d274a510
 
         $datap['users'] = User::get();
         $datap['user'] = User::where('email', 'rafal@rafal.pi')->first();
