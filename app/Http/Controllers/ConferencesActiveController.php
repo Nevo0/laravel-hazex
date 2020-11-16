@@ -15,7 +15,14 @@ class ConferencesActiveController extends Controller
      */
     public function index()
     {
-        $datap['ConferencesActive'] = ConferencesActive::get();
+       
+        // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toJson();
+        // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toArray();// $datap['ConferencesInactive'] = ConferencesInactive::select('id_cm','room_type','room_pin','name','name_url',)->get()->attributesToArray();
+        // dump($datap);
+        // return view('cm.home', compact('datap'));
+        $datap['ConferencesActive'] = ConferencesActive::select('id_cm','room_type','room_pin','name','name_url',)->get()->toArray();
+        $datap['where'] = ConferencesActive::where('id_cm', 4096472)->first()->toArray();
+        
         dump($datap);
         return view('cm.home', compact('datap'));
     }
@@ -94,14 +101,23 @@ class ConferencesActiveController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
         }
+        $datap = [];
+        $datap['ConferencesActive'] = ConferencesActive::get();
        
-       if (false) {
+      
         foreach ($conferences as $key => $conference) {
+            $is = ConferencesActive::where('id_cm', $conference->id)->first();
             
-            // if (true) {
-            //     # code...
-            //     var_dump($conference->lobby_description);
-            // }
+            
+            
+            if ($is == null) {
+                $datap["id"] = $is;
+                $datap["conference->id"] = $conference->id;
+                $datap["conference->name"] = $conference->name;
+                dump($datap);           
+           
+        }
+        if (false) {
             $ca= new ConferencesActive;
             $ca->id_cm = $conference->id;
             $ca->room_type = $conference->room_type;
@@ -149,12 +165,14 @@ class ConferencesActiveController extends Controller
             $ca->autologin_hashes = json_encode($conference->autologin_hashes);
             $ca->autologin_hash = $conference->autologin_hash;
             $ca->save();
-            
-            // var_dump($conference->starts_at) ;  
+            }
         }
-        return redirect('cm/a')->with('status', 'ConferencesActive updated!');
-       }
-       return redirect('cm/a')->with('status', 'ConferencesActive not updated!');
+        return view('cm.home', compact('datap'));
+        // return redirect('cm/a')->with('status', 'ConferencesActive updated!');
+       
+       
+    //    return redirect('cm/a')->with('status', 'ConferencesActive not updated!');
+    
         
         
 
