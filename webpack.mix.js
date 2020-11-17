@@ -13,5 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
-        //
+        // dodajem tailwind trzeba jeszcze w app.css dodac impport https://tailwindcss.com/docs/installation
+        require('tailwindcss'),
     ]);

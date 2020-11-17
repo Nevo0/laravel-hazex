@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConferencesController;
 use App\Http\Controllers\ConferencesActiveController;
 use App\Http\Controllers\ConferencesInactiveController;
+use App\Http\Controllers\Auth\RegisterController;
 
 use function App\Http\Controllers\allUser;
 
@@ -31,7 +32,21 @@ Route::get('/2', function () {
 
     return view('.user.home', compact('datap'));
 });
-Route::get('/', [UserController::class, 'allUsers']);
+
+// https://www.youtube.com/watch?v=MFh0Fd7BsjE&ab_channel=TraversyMedia
+
+Route::get('/', function(){
+    return view('post.index');
+})->name('homes');
+
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
+
+
+
+
+
+
 Route::get('/user/create', [UserController::class, 'createUser']);
 Route::post('/user/create', [UserController::class, 'seveUser'])->name('createuser');
 // xxx
@@ -39,5 +54,6 @@ Route::get('/user/{iduser}', [UserController::class, 'idUser']);
 Route::get('/cm', [ConferencesController::class, 'index']);
 Route::get('/cm/a', [ConferencesActiveController::class, 'index']);
 Route::get('/cm/n', [ConferencesInactiveController::class, 'index']);
+Route::get('/cm/n/{id}', [ConferencesInactiveController::class, 'show'])->name('cn_id');
 Route::get('/cm/check/a', [ConferencesActiveController::class, 'updateClickMetting']);
 Route::get('/cm/check/n', [ConferencesInactiveController::class, 'updateClickMetting']);

@@ -14,11 +14,22 @@ class ConferencesInactiveController extends Controller
      */
     public function index()
     {
+        $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
         $datap['ConferencesInactive'] = ConferencesInactive::orderByDesc('starts_at')->get();
         // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toJson();
         $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toArray();
         // $datap['ConferencesInactive'] = ConferencesInactive::select('id_cm','room_type','room_pin','name','name_url',)->get()->attributesToArray();
-        dump($datap);
+        ;
+
+
+        $datap['ConferencesinActiveAPI'] = $client->conferences('inactive');
+        
+        
+        $room_id= 4346625;
+        $datap['sessions'] = $client->conferenceSessions($room_id);  
+        // $session_id=  $datap['sessions'][0]->id;
+        // $datap['session'] = $client->conferenceSession($room_id, $session_id);
+        dump($datap,$datap['ConferencesInactive'],$datap['sessions']);
         return view('cm.list', compact('datap'));
     }
 
@@ -49,9 +60,12 @@ class ConferencesInactiveController extends Controller
      * @param  \App\Models\ConferencesInactive  $conferencesInactive
      * @return \Illuminate\Http\Response
      */
-    public function show(ConferencesInactive $conferencesInactive)
+    public function show(ConferencesInactive $conferencesInactive,Request $request ,$id)
     {
-        //
+        $datap=$conferencesInactive->findOrFail($id);
+        dump($datap,$request,$id);
+        return $id;
+        
     }
 
     /**

@@ -15,13 +15,20 @@ class ConferencesActiveController extends Controller
      */
     public function index()
     {
-       
+        $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
         // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toJson();
         // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toArray();// $datap['ConferencesInactive'] = ConferencesInactive::select('id_cm','room_type','room_pin','name','name_url',)->get()->attributesToArray();
         // dump($datap);
         // return view('cm.home', compact('datap'));
+        $datap['ConferencesActiveAPI'] = $client->conferences('active');
         $datap['ConferencesActive'] = ConferencesActive::select('id_cm','room_type','room_pin','name','name_url',)->get()->toArray();
         $datap['where'] = ConferencesActive::where('id_cm', 4096472)->first()->toArray();
+        $room_id= 4096472;
+        $datap['sessions'] = $client->conferenceSessions($room_id);  
+        $session_id=  $datap['sessions'][0]->id;
+        $datap['session'] = $client->conferenceSession($room_id, $session_id);
+        // $report = $client->generateConferenceSessionPDF($room_id, $session_id);
+        // $url = $report->url;
         
         dump($datap);
         return view('cm.home', compact('datap'));

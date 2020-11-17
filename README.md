@@ -4,6 +4,11 @@ i learn from YouTube
 first
 [MrDigital](https://www.youtube.com/watch?v=Hyj0aUyGwKE&list=PLgFB6lmeXFOqRC4Sc-RST38jboldiQdds&ab_channel=MrDigital)
 
+
+[Traversy Media](https://www.youtube.com/watch?v=Hyj0aUyGwKE&list=PLgFB6lmeXFOqRC4Sc-RST38jboldiQdds&ab_channel=MrDigital)
+
+[Codecourse](https://www.youtube.com/c/codecourse/videos)
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

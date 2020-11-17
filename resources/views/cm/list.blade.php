@@ -45,7 +45,7 @@
   </div>
 </div>
 
-    <a href="#" class="card-link" data-toggle="modal" data-target="#exampleModal">Zobacz uczestników</a>
+    <a href="{{ route('cn_id',  $inActive['id_cm'] ) }}" class="card-link" data-toggle="" data-target="#">Zobacz uczestników</a>
     <a href="#" class="card-link"> Wyslij do salesmenago</a>
     <!-- <p>{{ $inActive["id_cm"] }}</p> -->
     </div>
