@@ -14,12 +14,12 @@ class AddNewFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('username', 15)->after('id');
-            $table->string('lastname', 15)->after('username');
-            $table->string('firstname', 15)->after('lastname');
-            $table->string('contact')->nullable()->after('email');
-            $table->string('info')->nullable()->after('email');
-            $table->date('birthday')->nullable()->after('info');
+            $table->string('username')->after('id');
+            $table->string('lastname')->after('username');
+            $table->string('firstname')->after('lastname');
+            $table->string('contact')->after('email');
+            $table->string('info')->after('email');
+            $table->date('birthday')->after('info');
             $table->tinyInteger('status')->default(1)->after('birthday');
         });
     }

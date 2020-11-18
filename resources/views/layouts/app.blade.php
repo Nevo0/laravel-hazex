@@ -13,25 +13,54 @@
             <a href="{{ route('homes')}}" class="p-3">Home</a>
             </li>
             <li>
-                <a href="" class="p-3">Dashboard</a>
+                <a href="{{ route('dashboard')}}" class="p-3">Dashboard</a>
             </li>
             <li>
                 <a href="" class="p-3">Post</a>
             </li>
     </ul>
     <ul class="flex item-center">
+        {{-- @if (auth()->user())
         <li>
             <a href="" class="p-3">Rafal</a>
             </li>
             <li>
-                <a href="" class="p-3">Login</a>
-            </li>
-            <li>
-                <a href="{{ route('register')}}" class="p-3">Register</a>
-            </li>
-            <li>
                 <a href="" class="p-3">Logout</a>
             </li>
+
+
+        @else
+        <li>
+            <a href="" class="p-3">Login</a>
+        </li>
+        <li>
+            <a href="{{ route('register')}}" class="p-3">Register</a>
+        </li>
+        @endif --}}
+        @auth
+        <li>
+        <a href="" class="p-3">{{auth()->user()->name}}</a>
+            </li>
+            <li>
+                <form action="{{ route('logout')}}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="">Logout</button>
+                </form>
+
+                {{-- <a href="{{ route('logout')}}" class="p-3">Logout</a> --}}
+            </li>
+        @endauth
+        @guest
+        <li>
+            <a href="{{ route('login')}}" class="p-3">Login</a>
+        </li>
+        <li>
+            <a href="{{ route('register')}}" class="p-3">Register</a>
+        </li>
+        @endguest
+
+
+
     </ul>
     </nav>
     @yield('content')

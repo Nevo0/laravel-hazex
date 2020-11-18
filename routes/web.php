@@ -1,14 +1,17 @@
 <?php
 
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\UserController;
+use function App\Http\Controllers\allUser;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\ConferencesController;
+
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ConferencesActiveController;
 use App\Http\Controllers\ConferencesInactiveController;
-use App\Http\Controllers\Auth\RegisterController;
-
-use function App\Http\Controllers\allUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +39,24 @@ Route::get('/2', function () {
 // https://www.youtube.com/watch?v=MFh0Fd7BsjE&ab_channel=TraversyMedia
 
 Route::get('/', function(){
-    return view('post.index');
+    return view('home');
 })->name('homes');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+->name('dashboard');
+// ->middleware('auth');
+// middleware
+// https://youtu.be/MFh0Fd7BsjE?t=3503
+
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+// https://youtu.be/MFh0Fd7BsjE?t=3278
 
 
 

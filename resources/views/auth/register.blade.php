@@ -66,6 +66,11 @@
                 </div>
 
                 <div>
+                    @error('error')
+                    <div class="text-red-500 mt-2 text-sm">
+                        {{ $error }}
+                    </div>
+                @enderror
                     <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Register</button>
                 </div>
             </form>
