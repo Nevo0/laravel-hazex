@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use function App\Http\Controllers\allUser;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\ConferencesController;
 
+use App\Http\Controllers\ConferencesController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ConferencesActiveController;
 use App\Http\Controllers\ConferencesInactiveController;
@@ -58,6 +59,9 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 // https://youtu.be/MFh0Fd7BsjE?t=3278
 
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+// https://youtu.be/MFh0Fd7BsjE?t=4016
+Route::post('/posts', [PostController::class, 'store']);
 
 
 

@@ -28,7 +28,7 @@ class LoginController extends Controller
             'usernaem'=> ['require'],
         ]);
         if (!Auth::attempt($request->only('email', 'password'),$request->remember)) {
-            // remember https://youtu.be/MFh0Fd7BsjE?t=3899
+            // remember  https://youtu.be/MFh0Fd7BsjE?t=3899
             # code...
             return back()->with('status','Incorect login details');
         }
