@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ConferenceSession;
+use App\Models\Session;
+use App\Http\Resources\Session as SessionResource;
 use Illuminate\Http\Request;
 
 class ConferenceSessionController extends Controller
@@ -14,7 +15,8 @@ class ConferenceSessionController extends Controller
      */
     public function index()
     {
-        //
+        $sestion =Session::get();
+         return SessionResource::collection($sestion);
     }
 
     /**
@@ -60,17 +62,7 @@ class ConferenceSessionController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ConferenceSession  $conferenceSession
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ConferenceSession $conferenceSession)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.

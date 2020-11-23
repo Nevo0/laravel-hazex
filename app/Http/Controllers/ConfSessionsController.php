@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ConfSessions;
+use App\Models\SessionRoom;
 use Illuminate\Http\Request;
 
 class ConfSessionsController extends Controller
@@ -14,7 +14,7 @@ class ConfSessionsController extends Controller
      */
     public function index()
     {
-        //
+        $sestion = SessionRoom::get();
     }
 
     /**

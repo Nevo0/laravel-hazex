@@ -17,7 +17,7 @@ class PostController extends Controller
 
         // $posts= Post::get();
 
-        $posts = Post:: paginate(1);
+        $posts = Post::paginate(1);
         // dump($posts->links());
 
         return view('post.posts',['posts'=>$posts]);

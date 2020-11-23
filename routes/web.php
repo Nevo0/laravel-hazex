@@ -40,7 +40,29 @@ Route::get('/2', function () {
 // https://www.youtube.com/watch?v=MFh0Fd7BsjE&ab_channel=TraversyMedia
 
 Route::get('/', function(){
-    return view('home');
+    $user=[
+'name'=> 'rafal',
+'adress'=> [
+    'line1'=>'Iwiny 51'
+        ]
+];
+// destruktyryzacja tablicy
+[
+    'name'=> $name,
+    'adress'=> ['line1'=>$adressLine1]
+]= $user;
+// echo "xxx";
+$url= parse_url('https://hazex.eu/link/costa/');
+// $url= parse_url('https://hazex.eu/link/costa/xxx?query=xxx');
+
+// mozemy zdestrukturyzować tablice nawet jesli nie ma query w tablicy
+// musimy przypisać dommyślna wartość do wartości query
+['query'=> $queryLink]= array_merge(['query'=> 'null'],parse_url('https://hazex.eu/link/costa/asd')) ;
+['query'=> $queryLink]= parse_url('https://hazex.eu/link/costa/asd?a=1')+ ['query'=> 'null'] ;
+
+
+dump($name, $adressLine1, $url, $queryLink);
+return view('home');
 })->name('homes');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
