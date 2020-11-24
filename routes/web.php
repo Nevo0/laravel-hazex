@@ -1,16 +1,22 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use function App\Http\Controllers\allUser;
+use App\Http\Controllers\InactiveController;
 use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\IinactiveController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-
 use App\Http\Controllers\ConferencesController;
+
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Resources\Session as SessionResource;
+use App\Http\Controllers\IinactivesessionController;
 use App\Http\Controllers\ConferencesActiveController;
 use App\Http\Controllers\ConferencesInactiveController;
 
@@ -29,6 +35,9 @@ use App\Http\Controllers\ConferencesInactiveController;
 //     Artisan::call('cache:clear');
 //     return "Cache is cleared";
 // });
+
+
+
 
 Route::get('/2', function () {
     $datap['name'] = "Rafal";
@@ -95,7 +104,13 @@ Route::post('/user/create', [UserController::class, 'seveUser'])->name('createus
 Route::get('/user/{iduser}', [UserController::class, 'idUser']);
 Route::get('/cm', [ConferencesController::class, 'index']);
 Route::get('/cm/a', [ConferencesActiveController::class, 'index']);
-Route::get('/cm/n', [ConferencesInactiveController::class, 'index']);
+Route::get('/cm/n', [IinactiveController::class, 'index']);
 Route::get('/cm/n/{id}', [ConferencesInactiveController::class, 'show'])->name('cn_id');
 Route::get('/cm/check/a', [ConferencesActiveController::class, 'updateClickMetting']);
-Route::get('/cm/check/n', [ConferencesInactiveController::class, 'updateClickMetting']);
+Route::get('/cm/check/n', [IinactiveController::class, 'updateClickMetting']);
+
+
+Route::get('/cm/s/createAll', [IinactivesessionController::class, 'createAll']);
+Route::get('/cm/s/{id}', [IinactivesessionController::class, 'show'])->name('sesion_cm_id');
+
+

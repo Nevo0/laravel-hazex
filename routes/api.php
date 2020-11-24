@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Resources\Session as SessionResource;
 use App\Http\Controllers\ConferenceSessionController;
 
 /*
@@ -20,8 +23,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+
 Route::get('/sesioncm', [ConferenceSessionController::class, 'index']);
 Route::get('/sesioncm/{id}', [ConferenceSessionController::class, 'show']);
 Route::post('/sesioncm/{id}', [ConferenceSessionController::class, 'store']);
 Route::put('/sesioncm/{id}', [ConferenceSessionController::class, 'store']);
 Route::delete('/sesioncm/{id}', [ConferenceSessionController::class, 'destroy']);
+
+
+
+
+
+
+
+

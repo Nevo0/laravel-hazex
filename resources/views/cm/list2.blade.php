@@ -8,10 +8,10 @@
         {{ session('status') }}
     </div>
 @endif
-@if($datap["ConferencesInactive"]['data'])
+@if($datap["IinactiveController"]['data'])
 <div class="container">
   <div class="row">
-@foreach ($datap["ConferencesInactive"]['data'] as $inActive)
+@foreach ($datap["IinactiveController"]['data'] as $inActive)
 
 <div class="col-3">
 <div class="card  bg-green" >
@@ -45,9 +45,9 @@
   </div>
 </div>
 
-    <a href="{{ route('cn_id',  $inActive['id_cm'] ) }}" class="card-link" data-toggle="" data-target="#">Zobacz uczestników</a>
+    <a href="{{ route('sesion_cm_id',  $inActive['idcm'] ) }}" class="card-link" data-toggle="" data-target="#">Zobacz uczestników</a>
     <a href="#" class="card-link"> Wyslij do salesmenago</a>
-    <!-- <p>{{ $inActive["id_cm"] }}</p> -->
+    <!-- <p>{{ $inActive["idcm"] }}</p> -->
     </div>
     </div>
     </div>
@@ -63,7 +63,7 @@
     {{-- {{ datap["ConferencesInactive"]->links()}} --}}
 </div>
 
-
+@endsection
 
 @section('scriptheader')
     <script>

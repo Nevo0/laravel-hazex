@@ -4,6 +4,9 @@
  * ClickMeeting REST client
  */
 namespace App\Http\Controllers;
+
+
+
 class ClickMeetingRestClient
 {
     /**
