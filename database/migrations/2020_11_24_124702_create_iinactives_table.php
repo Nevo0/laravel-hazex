@@ -36,16 +36,16 @@ class CreateIinactivesTable extends Migration
             $table->integer('type')->nullable();
             $table->string('permanent_room')->nullable();
             $table->string('ccc')->nullable();
-            $table->json('access_role_hashes')->nullable();
+            // $table->json('access_role_hashes')->nullable();
             $table->string('room_url')->nullable();
             $table->string('phone_presenter_pin')->nullable();
             $table->string('phone_listener_pin')->nullable();
             $table->string('embed_room_url')->nullable();
             $table->string('widgets_hash')->nullable();
-            $table->json('relation')->nullable();
-            $table->json('recorder_list')->nullable();
-            $table->json('settings')->nullable();
-            $table->json('autologin_hashes')->nullable();
+            // $table->json('relation')->nullable();
+            // $table->json('recorder_list')->nullable();
+            // $table->json('settings')->nullable();
+            // $table->json('autologin_hashes')->nullable();
             $table->string('autologin_hash')->nullable();
         });
     }
