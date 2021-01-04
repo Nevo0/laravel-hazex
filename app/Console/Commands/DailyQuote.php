@@ -97,7 +97,7 @@ class DailyQuote extends Command
             }
             if (!empty($conference->ends_at)) {
                 
-                echo $conference->ends_at;
+                
                 $ca->ends_at = date('Y-m-d h:i:s', strtotime($conference->ends_at));
               }
             $ca->access_type = $conference->access_type;
@@ -134,19 +134,12 @@ class DailyQuote extends Command
             }
         }        
     }
-
         // Setting up a random word
         $key = array_rand($quotes);
         $data = $quotes[$key];
-
-
-        $users = User::all();
-
-
-        $this->info('Successfully sent daily quote to everyone.');
-        Cache::forget('quotes'); //usuwamy poprzednie
-        Cache::forever('quotes', $data); //nowe zapisujemy na zawsze
-        Log::info($data);
         updateClickMetting();
+        $this->info('Successfully sent daily quote to everyone.');
+        // Log::info($data);
+        Log::info('Successfully get meeting');
     }
 }
