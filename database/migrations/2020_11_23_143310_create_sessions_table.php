@@ -20,8 +20,8 @@ class CreateSessionsTable extends Migration
             $table->string('max_visitors')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->json('attendees')->nullable();
-            $table->json('pdf')->nullable();
+            // $table->json('attendees')->nullable();
+            // $table->json('pdf')->nullable();
             $table->timestamps();
         });
     }
