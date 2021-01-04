@@ -25,6 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/sesioncm', [ConferenceSessionController::class, 'index']);
+Route::get('/allactiveconferencs', [ConferenceSessionController::class, 'allactiveconferencs']);
 Route::get('/sesioncm/{id}', [ConferenceSessionController::class, 'show']);
 Route::post('/sesioncm/{id}', [ConferenceSessionController::class, 'store']);
 Route::put('/sesioncm/{id}', [ConferenceSessionController::class, 'store']);

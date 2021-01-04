@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Session;
+use App\Models\ConferencesActive;
 use App\Http\Resources\Session as SessionResource;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,15 @@ class ConferenceSessionController extends Controller
     {
         $sestion =Session::get();
          return SessionResource::collection($sestion);
+    }
+
+    public function allactiveconferencs()
+    {
+        $x=ConferencesActive::select('id_cm','room_type','room_pin','name','name_url','starts_at','ends_at')->get()->toArray();
+        // var_dump($x);
+        $sestion =Session::get();
+        
+         return SessionResource::collection($x);
     }
 
     /**
