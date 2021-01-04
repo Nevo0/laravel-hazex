@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ConferencesActive;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ClickMeetingRestClient;
+use Illuminate\Support\Facades\DB;
 
 class ConferencesActiveController extends Controller
 {
@@ -22,7 +23,7 @@ class ConferencesActiveController extends Controller
         // return view('cm.home', compact('datap'));
         $datap['ConferencesActiveAPI'] = $client->conferences('active');
         $datap['ConferencesActive'] = ConferencesActive::select('id_cm','room_type','room_pin','name','name_url',)->get()->toArray();
-        $datap['where'] = ConferencesActive::where('id_cm', 4096472)->first()->toArray();
+        // $datap['where'] = ConferencesActive::where('id_cm', 4096472)->first()->toArray();
         $room_id= 4096472;
         $datap['sessions'] = $client->conferenceSessions($room_id);  
         $session_id=  $datap['sessions'][0]->id;
@@ -102,6 +103,7 @@ class ConferencesActiveController extends Controller
     }
     public function updateClickMetting(Request $request)
     {
+        DB::table('conferences_actives')->delete();
             $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
         try {
             $conferences = $client->conferences('active');
@@ -123,8 +125,7 @@ class ConferencesActiveController extends Controller
                 $datap["conference->name"] = $conference->name;
                 dump($datap);           
            
-        }
-        if (false) {
+      
             $ca= new ConferencesActive;
             $ca->id_cm = $conference->id;
             $ca->room_type = $conference->room_type;
