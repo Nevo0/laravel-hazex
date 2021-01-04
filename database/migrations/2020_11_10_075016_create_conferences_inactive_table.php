@@ -20,8 +20,8 @@ class CreateConferencesInactiveTable extends Migration
             $table->integer('room_pin')->nullable();
             $table->string('name')->nullable();
             $table->string('name_url')->nullable();         
-            $table->date('starts_at')->nullable();
-            $table->date('ends_at')->nullable();
+            $table->dateTime('starts_at')->nullable();
+            $table->dateTime('ends_at')->nullable();
             $table->string('access_type')->nullable();
             $table->string('lobby_enabled')->nullable();
             $table->text('lobby_description')->nullable();
@@ -31,8 +31,8 @@ class CreateConferencesInactiveTable extends Migration
             $table->integer('timezone_offset')->nullable();
             $table->integer('paid_enabled')->nullable();
             $table->integer('automated_enabled')->nullable();
-            $table->date('created_at')->nullable();
-            $table->date('updated_at')->nullable();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
             $table->integer('type')->nullable();
             $table->string('permanent_room')->nullable();
             $table->string('ccc')->nullable();

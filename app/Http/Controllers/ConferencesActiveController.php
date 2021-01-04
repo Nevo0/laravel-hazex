@@ -134,12 +134,14 @@ class ConferencesActiveController extends Controller
             $ca->name_url = $conference->name_url;
             if (!empty($conference->starts_at)) {
                 echo $conference->starts_at;
+                echo $ca->starts_at  . '</br>';
                 
                 $ca->starts_at = date('Y-m-d h:i:s', strtotime($conference->starts_at));
             }
             if (!empty($conference->ends_at)) {
                 
                 echo $conference->ends_at;
+                echo  date('Y-m-d h:i:s', strtotime($conference->ends_at))  . '</br>';
                 $ca->ends_at = date('Y-m-d h:i:s', strtotime($conference->ends_at));
               }
             $ca->access_type = $conference->access_type;
