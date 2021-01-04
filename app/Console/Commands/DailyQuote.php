@@ -118,17 +118,13 @@ class DailyQuote extends Command
                 // echo $conference->ends_at;
                 $ca->ccc = $conference->ccc;
                 // $ca->ends_at = date('Y-m-d h:i:s', strtotime($conference->ends_at));
-              }
-            
-            $ca->access_role_hashes = json_encode($conference->access_role_hashes);
-            $ca->room_url = $conference->room_url;
+              }          
+                      $ca->room_url = $conference->room_url;
             $ca->phone_presenter_pin = $conference->phone_presenter_pin;
             $ca->phone_listener_pin = $conference->phone_listener_pin;
             $ca->embed_room_url = $conference->embed_room_url;
             $ca->widgets_hash = $conference->widgets_hash;
-            $ca->recorder_list = json_encode($conference->recorder_list);
-            $ca->settings = json_encode($conference->settings);
-            $ca->autologin_hashes = json_encode($conference->autologin_hashes);
+            
             $ca->autologin_hash = $conference->autologin_hash;
             $ca->save();
             }
