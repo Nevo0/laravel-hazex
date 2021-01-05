@@ -66,7 +66,7 @@ class DailyQuote extends Command
         try {
             $conferences = $client->conferences('active');
         } catch (\Throwable $th) {
-            Log::info($th);
+            Log::info("error");
             return;
         }
         $datap = [];
