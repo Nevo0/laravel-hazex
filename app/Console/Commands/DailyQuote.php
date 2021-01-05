@@ -150,9 +150,9 @@ class DailyQuote extends Command
         }
 
         if ($czas == "15:05"){
-            updateClickMetting();
             Log::info('Successfully get meeting 15:05');
         }
+        updateClickMetting();
         Log::info('Wait on'. $czas);
 
         // $this->info($czas);
