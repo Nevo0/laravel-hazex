@@ -133,8 +133,10 @@ class DailyQuote extends Command
         // Setting up a random word
         $key = array_rand($quotes);
         $data = $quotes[$key];
-        // updateClickMetting();
-        // $this->info('Successfully sent daily quote to everyone.');
+        $czas=date("H:i");
+        updateClickMetting();
+
+        $this->info($czas);
         // Log::info($data);
         Log::info('Successfully get meeting2');
     }
