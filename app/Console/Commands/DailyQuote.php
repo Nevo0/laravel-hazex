@@ -145,7 +145,7 @@ if ($czas == "15:05"){
     Log::info('Successfully get meeting2');
 }
 
-if ($czas == "15:15"){
+if ($czas == "13:16"){
     updateClickMetting();
     Log::info('Successfully get meeting 15:15');
     Log::info('Successfully get meeting');
