@@ -136,8 +136,21 @@ class DailyQuote extends Command
         $czas=date("H:i");
         updateClickMetting();
 
+if ($czas == "11:05"){
+    updateClickMetting();
+    Log::info('Successfully get meeting2');
+}
+if ($czas == "15:05"){
+    updateClickMetting();
+    Log::info('Successfully get meeting2');
+}
+
+if ($czas == "15:15"){
+    updateClickMetting();
+    Log::info('Successfully get meeting 15:15');
+    Log::info('Successfully get meeting');
+}
         $this->info($czas);
         // Log::info($data);
-        Log::info('Successfully get meeting2');
     }
 }
