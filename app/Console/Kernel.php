@@ -40,8 +40,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('quote:daily')->daily();
         // $schedule->command('getWeather:current')
         //     ->everyMinute();
-        // $schedule->command('log:cron')
-        //     ->everyMinute();
+        $schedule->command('log:cron')
+            ->everyMinute();
     }
 
     /**
