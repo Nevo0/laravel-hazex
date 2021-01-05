@@ -133,24 +133,29 @@ class DailyQuote extends Command
         // Setting up a random word
         $key = array_rand($quotes);
         $data = $quotes[$key];
-        $czas=date("H:i");
-        updateClickMetting();
+        $czas=date("H:i");       
 
-if ($czas == "11:05"){
-    updateClickMetting();
-    Log::info('Successfully get meeting2');
-}
-if ($czas == "15:05"){
-    updateClickMetting();
-    Log::info('Successfully get meeting2');
-}
+        if ($czas == "10:06"){
+            updateClickMetting();
+            Log::info('Successfully get meeting 10:06');
+            
+        }
+        if ($czas == "11:05"){
+            updateClickMetting();
+            Log::info('Successfully get meeting 11:05');
+        }
+        if ($czas == "13:05"){
+            updateClickMetting();
+            Log::info('Successfully get meeting 13:05');
+        }
 
-if ($czas == "13:16"){
-    updateClickMetting();
-    Log::info('Successfully get meeting 15:15');
-    Log::info('Successfully get meeting');
-}
-        $this->info($czas);
+        if ($czas == "15:05"){
+            updateClickMetting();
+            Log::info('Successfully get meeting 15:05');
+        }
+        Log::info('Wait on'. $czas);
+
+        // $this->info($czas);
         // Log::info($data);
     }
 }
