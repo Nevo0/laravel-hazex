@@ -61,9 +61,10 @@ class DailyQuote extends Command
         ];
         function updateClickMetting()
     {
-        DB::table('conferences_actives')->delete();
+        
             $client = new ClickMeetingRestClient(array('api_key' => 'euae09e84abcf50d1bda5aad3f6a8dc37d310bab32'));
         try {
+            DB::table('conferences_actives')->delete();
             $conferences = $client->conferences('active');
         } catch (\Throwable $th) {
             Log::info("error");
@@ -82,7 +83,7 @@ class DailyQuote extends Command
                 $datap["id"] = $is;
                 $datap["conference->id"] = $conference->id;
                 $datap["conference->name"] = $conference->name;
-                dump($datap);           
+                // dump($datap);           
            
       
             $ca= new ConferencesActive;
@@ -92,7 +93,7 @@ class DailyQuote extends Command
             $ca->name = $conference->name;
             $ca->name_url = $conference->name_url;
             if (!empty($conference->starts_at)) {
-                echo $conference->starts_at;
+                // echo $conference->starts_at;
                 
                 $ca->starts_at = date('Y-m-d h:i:s', strtotime($conference->starts_at));
             }
@@ -153,7 +154,7 @@ class DailyQuote extends Command
         if ($czas == "15:05"){
             Log::info('Successfully get meeting 15:05');
         }
-        updateClickMetting();
+        // updateClickMetting();
         Log::info('Wait on'. $czas);
         // $this->info(env('CM_KEY'));
         // $this->info($czas);
