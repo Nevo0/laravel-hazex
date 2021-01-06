@@ -62,7 +62,7 @@ class DailyQuote extends Command
         function updateClickMetting()
     {
         DB::table('conferences_actives')->delete();
-            $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
+            $client = new ClickMeetingRestClient(array('api_key' => 'euae09e84abcf50d1bda5aad3f6a8dc37d310bab32'));
         try {
             $conferences = $client->conferences('active');
         } catch (\Throwable $th) {
@@ -153,9 +153,9 @@ class DailyQuote extends Command
         if ($czas == "15:05"){
             Log::info('Successfully get meeting 15:05');
         }
-        // updateClickMetting();
+        updateClickMetting();
         Log::info('Wait on'. $czas);
-
+        // $this->info(env('CM_KEY'));
         // $this->info($czas);
         // Log::info($data);
     }
