@@ -19,7 +19,7 @@ class ClickMeetingRestClient
      * API key
      * @var string
      */
-    protected $api_key = null;
+    protected $api_key = 'euae09e84abcf50d1bda5aad3f6a8dc37d310bab32';
 
     /**
      * Format
@@ -68,7 +68,8 @@ class ClickMeetingRestClient
         }
 
         $this->url = isset($params['url']) ? $params['url'] : $this->url;
-        $this->api_key = isset($params['api_key']) ? $params['api_key'] : $this->api_key;
+        // $this->api_key = isset($params['api_key']) ? $params['api_key'] : $this->api_key;
+        $this->api_key = $this->api_key;
         $this->format = isset($params['format']) && in_array(strtolower($params['format']), $this->formats) ? strtolower($params['format']) : $this->format;
     }
 
