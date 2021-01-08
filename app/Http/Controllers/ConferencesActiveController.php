@@ -103,10 +103,10 @@ class ConferencesActiveController extends Controller
     }
     public function updateClickMetting(Request $request)
     {
-        DB::table('conferences_actives')->delete();
-            $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
+        $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
         try {
             $conferences = $client->conferences('active');
+            DB::table('conferences_actives')->delete();
         } catch (\Throwable $th) {
             //throw $th;
         }

@@ -14,8 +14,9 @@ class ConferencesInactiveController extends Controller
      */
     public function index()
     {
+        
         $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
-        $datap['ConferencesinActiveAPI']=[];
+  
 
         $datap['ConferencesInactive'] = ConferencesInactive::orderByDesc('starts_at')->paginate(12);
         // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toJson();
@@ -26,7 +27,7 @@ class ConferencesInactiveController extends Controller
         $session_id=  $datap['sessions'][0]->id;
         $datap['session'] = $client->conferenceSession($room_id, $session_id);
         dump($datap);
-        return view('cm.list2', compact('datap'));
+        // return view('cm.list2', compact('datap'));
     }
 
     /**
@@ -92,15 +93,12 @@ class ConferencesInactiveController extends Controller
                 if (!empty($conference->ccc)) {
                     $ca->ccc = $conference->ccc;
                   }
-                $ca->access_role_hashes = json_encode($conference->access_role_hashes);
+               
                 $ca->room_url = $conference->room_url;
                 $ca->phone_presenter_pin = $conference->phone_presenter_pin;
                 $ca->phone_listener_pin = $conference->phone_listener_pin;
                 $ca->embed_room_url = $conference->embed_room_url;
-                $ca->widgets_hash = $conference->widgets_hash;
-                $ca->recorder_list = json_encode($conference->recorder_list);
-                $ca->settings = json_encode($conference->settings);
-                $ca->autologin_hashes = json_encode($conference->autologin_hashes);
+                $ca->widgets_hash = $conference->widgets_hash;                
                 $ca->autologin_hash = $conference->autologin_hash;
                 $ca->save();
     }
@@ -200,15 +198,13 @@ class ConferencesInactiveController extends Controller
                 if (!empty($conference->ccc)) {
                     $ca->ccc = $conference->ccc;
                   }
-                $ca->access_role_hashes = json_encode($conference->access_role_hashes);
+                
                 $ca->room_url = $conference->room_url;
                 $ca->phone_presenter_pin = $conference->phone_presenter_pin;
                 $ca->phone_listener_pin = $conference->phone_listener_pin;
                 $ca->embed_room_url = $conference->embed_room_url;
                 $ca->widgets_hash = $conference->widgets_hash;
-                $ca->recorder_list = json_encode($conference->recorder_list);
-                $ca->settings = json_encode($conference->settings);
-                $ca->autologin_hashes = json_encode($conference->autologin_hashes);
+         
                 $ca->autologin_hash = $conference->autologin_hash;
                 $ca->save();
 
@@ -259,15 +255,13 @@ class ConferencesInactiveController extends Controller
                 // $ca->ends_at = date('Y-m-d h:i:s', strtotime($conference->ends_at));
               }
 
-            $ca->access_role_hashes = json_encode($conference->access_role_hashes);
+            
             $ca->room_url = $conference->room_url;
             $ca->phone_presenter_pin = $conference->phone_presenter_pin;
             $ca->phone_listener_pin = $conference->phone_listener_pin;
             $ca->embed_room_url = $conference->embed_room_url;
             $ca->widgets_hash = $conference->widgets_hash;
-            $ca->recorder_list = json_encode($conference->recorder_list);
-            $ca->settings = json_encode($conference->settings);
-            $ca->autologin_hashes = json_encode($conference->autologin_hashes);
+           
             $ca->autologin_hash = $conference->autologin_hash;
             $ca->save();
 

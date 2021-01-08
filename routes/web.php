@@ -104,10 +104,10 @@ Route::post('/user/create', [UserController::class, 'seveUser'])->name('createus
 Route::get('/user/{iduser}', [UserController::class, 'idUser']);
 Route::get('/cm', [ConferencesController::class, 'index']);
 Route::get('/cm/a', [ConferencesActiveController::class, 'index']);
-Route::get('/cm/n', [IinactiveController::class, 'index']);
+Route::get('/cm/n', [ConferencesInactiveController::class, 'index']);
 Route::get('/cm/n/{id}', [ConferencesInactiveController::class, 'show'])->name('cn_id');
 Route::get('/cm/check/a', [ConferencesActiveController::class, 'updateClickMetting']);
-Route::get('/cm/check/n', [IinactiveController::class, 'updateClickMetting']);
+Route::get('/cm/check/n', [ConferencesInactiveController::class, 'updateClickMetting']);
 
 
 Route::get('/cm/s/createAll', [IinactivesessionController::class, 'createAll']);

@@ -8,10 +8,10 @@
         {{ session('status') }}
     </div>
 @endif
-@if($datap["IinactiveController"]['data'])
+@if($datap["ConferencesInactive"]['data'])
 <div class="container">
   <div class="row">
-@foreach ($datap["IinactiveController"]['data'] as $inActive)
+@foreach ($datap["ConferencesInactive"]['data'] as $inActive)
 
 <div class="col-3">
 <div class="card  bg-green" >

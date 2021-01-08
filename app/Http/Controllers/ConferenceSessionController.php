@@ -24,7 +24,7 @@ class ConferenceSessionController extends Controller
     {
         $x=ConferencesActive::select('id_cm','room_type','room_pin','name','name_url','starts_at','ends_at')->get()->toArray();
         // var_dump($x);
-        $sestion =Session::get();
+       
         
          return SessionResource::collection($x);
     }

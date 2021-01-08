@@ -130,7 +130,8 @@ class DailyQuote extends Command
             $ca->autologin_hash = $conference->autologin_hash;
             $ca->save();
             }
-        }        
+        }       
+        Log::info('Successfully get meeting '); 
     }
         // Setting up a random word
         $key = array_rand($quotes);
@@ -139,22 +140,26 @@ class DailyQuote extends Command
 
         if ($czas == "10:06"){
             updateClickMetting();
-            Log::info('Successfully get meeting 10:06');
+            
             
         }
         if ($czas == "11:05"){
             updateClickMetting();
-            Log::info('Successfully get meeting 11:05');
+            
         }
         if ($czas == "13:05"){
             updateClickMetting();
-            Log::info('Successfully get meeting 13:05');
+            
         }
 
         if ($czas == "15:05"){
-            Log::info('Successfully get meeting 15:05');
+            updateClickMetting();
+            
         }
-        // updateClickMetting();
+        if ($czas == "03:05"){
+            updateClickMetting();
+            
+        }
         Log::info('Wait on'. $czas);
         // $this->info(env('CM_KEY'));
         // $this->info($czas);
