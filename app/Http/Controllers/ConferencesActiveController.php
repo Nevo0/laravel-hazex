@@ -28,6 +28,7 @@ class ConferencesActiveController extends Controller
         $datap['sessions'] = $client->conferenceSessions($room_id);  
         $session_id=  $datap['sessions'][0]->id;
         $datap['session'] = $client->conferenceSession($room_id, $session_id);
+        $datap['CM_KEY'] = env('CM_KEY');
         // $report = $client->generateConferenceSessionPDF($room_id, $session_id);
         // $url = $report->url;
         

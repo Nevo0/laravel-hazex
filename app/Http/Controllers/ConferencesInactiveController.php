@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ConferencesInactive;
+use App\Http\Controllers\SalesmanagoController as SM;
 use Illuminate\Http\Request;
 
 class ConferencesInactiveController extends Controller
@@ -18,15 +19,52 @@ class ConferencesInactiveController extends Controller
         $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
   
 
-        $datap['ConferencesInactive'] = ConferencesInactive::orderByDesc('starts_at')->paginate(12);
+        $datap['ConferencesInactive'] = ConferencesInactive::orderByDesc('starts_at')->paginate(1);
         // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toJson();
         $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toArray();
+        foreach ($datap['ConferencesInactive']['data'] as $key => $sessions)
+        {
+            $inactive_id =$sessions['id'];
+            $starts_at = date('Y-m-d', strtotime($sessions['starts_at']));
+            dump($starts_at);
+            $room_id =$sessions['id_cm'];
+            if ($sessions['access_type'] == 1) {
+                // bedziemy zmienac ta wartośc jesli została dodana osoba z sukcesem, aby działało jak na razie 1
+                $datap['sessions'][$key] = $client->conferenceSessions($sessions["id_cm"]);   
+                foreach ($datap['sessions'][$key] as $key2 => $session)
+                    {
+                        $session_id= $session->id;
+                        $visitors=  $this->update2($room_id, $session_id);
+                        $datap['sessions'][$key]['visitors']= $visitors;
+
+                    }
+                
+            }
+            $salesmanagoController = new SalesmanagoController();
+            $salesmanagoController->process_contact_form_sm2($visitors, $sessions['name_url'] ,$starts_at);
+            // echo $salesmanagoController->send_tag_to_sm(1);
+
+            // updateA($inactive_id);
+        }  
+        // dump($datap);
         // $datap['ConferencesInactive'] = ConferencesInactive::select('id_cm','room_type','room_pin','name','name_url',)->get()->attributesToArray();
-        $room_id= 4346625;
-        $datap['sessions'] = $client->conferenceSessions($room_id);
-        $session_id=  $datap['sessions'][0]->id;
-        $datap['session'] = $client->conferenceSession($room_id, $session_id);
-        dump($datap);
+        
+        // $datap['sessions'] = $client->conferenceSessions($room_id);
+
+        // $session_id=  $datap['sessions'][0]->id;
+        // $datap['session'] = $client->conferenceSession($room_id, $session_id);
+        // // $client = new ClickMeetingRestClient($cm_api_KEY);
+        // try {
+        //     $datap['sessionattendees'] = $client->conferenceSessionAttendees($room_id, $session_id);
+        //     $datap['sessionsessions'] = $client->conferenceSessions("3766615");
+        //     // var_dump($sessions);
+        //     // echo "</br>";
+        //     // var_dump($attendees);
+        //     // echo "</br>";
+        // } catch (Exception $e) {
+        //     // handle exceptions here
+        // }
+       
         // return view('cm.list2', compact('datap'));
     }
 
@@ -138,6 +176,64 @@ class ConferencesInactiveController extends Controller
     public function update(Request $request, ConferencesInactive $conferencesInactive)
     {
         //
+    }
+    public function updateA($id)
+    {
+        $conferencesInactive = ConferencesInactive::find($id);
+        $conferencesInactive->access_type == 0;
+        $conferencesInactive->save();
+    }
+    public function unique_multidim_array2($array, $key)
+        {
+            // tymczasowa tablica dla całej tablicy
+            $temp_array = array();
+            $i = 0;
+            // tymczasowa tablica dla emaili
+            $key_array = array();       
+            
+            foreach ($array as $val) {    
+                $start_date=strtotime($val["start_date"]);
+                $end_date=strtotime($val["end_date"]);
+                
+                if(($end_date - $start_date)> 440){
+
+                    // echo  "</br>";
+                    // echo  $end_date - $start_date;
+                    // printr($interval);
+                    // echo $start_date." end-> " .$end_date." | ". ($end_date - $start_date)."  </br>";
+                    // jesli dany email nie znajduje sie w tymczasowaej tablicy obiektow wtedy dodaj ten obiekt do tablicy temp_array i dana watrosc umiesc w key_array
+                        if (!in_array($val[$key], $key_array)) {
+                            $key_array[$i] = $val[$key];
+                            $temp_array[$i] = $val;
+                            $temp_array[$i]['czas'] =($end_date - $start_date)/60 ;
+                        }
+                        $i++;
+                }
+                
+                }
+         
+            // print_r($array);
+            return $temp_array;
+        }
+    public function update2($room_id, $session_id)
+    {
+        $client2 = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
+        
+        try {
+            $session2 = $client2->conferenceSession($room_id, $session_id);
+            // $this->conferences_arr[$room_id]['total_visitors']= $session->max_visitors;    
+                            
+            $datap['$session->attendees']= $session2->attendees;
+            $stdClass = json_decode(json_encode($session2->attendees), true);   
+            
+            return $this->unique_multidim_array2($stdClass,'email');
+            // $this->conferences_arr[$room_id]["attendees"] = $attendees;
+          
+        } catch (Exception $e) {
+            echo '<pre>';
+            print_r($e);
+            echo  '</pre>';
+        }
     }
 
     /**
