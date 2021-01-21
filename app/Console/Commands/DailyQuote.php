@@ -133,7 +133,7 @@ class DailyQuote extends Command
             }
         }       
         Log::info('Successfully get meeting '); 
-        Log::info('Wait on'. $czas);
+        // Log::info('Wait on'. $czas);
 
     }
         // Setting up a random word
