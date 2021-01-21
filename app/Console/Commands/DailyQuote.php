@@ -145,13 +145,16 @@ class DailyQuote extends Command
             $conferencesInactiveController = new ConferencesInactiveController();
             $conferencesInactiveController->updateClickMetting();
             $conferencesInactiveController->send_to_SM_visitors_witch_tag();
+            Log::info('update CM, send tag, activ '. $czas);
         }
         if ($czas == "11:05"){
             updateClickMetting();
+            Log::info('activ '. $czas);
             
         }
         if ($czas == "13:05"){
             updateClickMetting();
+            Log::info('activ '. $czas);
             
         }
 
@@ -160,6 +163,7 @@ class DailyQuote extends Command
             $conferencesInactiveController = new ConferencesInactiveController();
             $conferencesInactiveController->updateClickMetting();
             $conferencesInactiveController->send_to_SM_visitors_witch_tag();
+            Log::info('update CM, send tag, activ '. $czas);
             
         }
         if ($czas == "03:05"){
@@ -167,12 +171,12 @@ class DailyQuote extends Command
             $conferencesInactiveController = new ConferencesInactiveController();
             $conferencesInactiveController->updateClickMetting();
             $conferencesInactiveController->send_to_SM_visitors_witch_tag();
+            Log::info('update CM, send tag, activ '. $czas);
         }
         
 
-        Log::info('Wait on'. $czas);
-
-        Log::info(env('CM_KEY'));
+        // Log::info('Wait on'. $czas);
+        // Log::info(env('CM_KEY'));
         // $this->info(env('CM_KEY'));
         // $this->info($czas);
         // Log::info($data);
