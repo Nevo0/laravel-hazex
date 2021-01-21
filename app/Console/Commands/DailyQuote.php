@@ -62,10 +62,9 @@ class DailyQuote extends Command
         ];
         function updateClickMetting()
     {
-        
+        DB::table('conferences_actives')->delete();
             $client = new ClickMeetingRestClient(array('api_key' => 'euae09e84abcf50d1bda5aad3f6a8dc37d310bab32'));
         try {
-            DB::table('conferences_actives')->delete();
             $conferences = $client->conferences('active');
         } catch (\Throwable $th) {
             Log::info("error");
@@ -84,7 +83,7 @@ class DailyQuote extends Command
                 $datap["id"] = $is;
                 $datap["conference->id"] = $conference->id;
                 $datap["conference->name"] = $conference->name;
-                // dump($datap);           
+                dump($datap);           
            
       
             $ca= new ConferencesActive;
@@ -94,7 +93,7 @@ class DailyQuote extends Command
             $ca->name = $conference->name;
             $ca->name_url = $conference->name_url;
             if (!empty($conference->starts_at)) {
-                // echo $conference->starts_at;
+                echo $conference->starts_at;
                 
                 $ca->starts_at = date('Y-m-d h:i:s', strtotime($conference->starts_at));
             }
@@ -143,8 +142,9 @@ class DailyQuote extends Command
 
         if ($czas == "10:06"){
             updateClickMetting();
-            
-            
+            $conferencesInactiveController = new ConferencesInactiveController();
+            $conferencesInactiveController->updateClickMetting();
+            $conferencesInactiveController->send_to_SM_visitors_witch_tag();
         }
         if ($czas == "11:05"){
             updateClickMetting();
@@ -161,15 +161,15 @@ class DailyQuote extends Command
         }
         if ($czas == "03:05"){
             updateClickMetting();
-            
-            
+            $conferencesInactiveController = new ConferencesInactiveController();
+            $conferencesInactiveController->updateClickMetting();
+            $conferencesInactiveController->send_to_SM_visitors_witch_tag();
         }
-        $conferencesInactiveController = new ConferencesInactiveController();
-        $conferencesInactiveController->updateClickMetting();
-        $conferencesInactiveController->send_to_SM_visitors_witch_tag();
+        
 
-        // Log::info('Wait on'. $czas);
-        $this->info(env('CM_KEY'));
+        Log::info('Wait on'. $czas);
+        Log::info(env('CM_KEY'));
+        // $this->info(env('CM_KEY'));
         // $this->info($czas);
         // Log::info($data);
         
