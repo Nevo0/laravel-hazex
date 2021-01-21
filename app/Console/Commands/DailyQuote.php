@@ -15,6 +15,7 @@ use App\Models\ConferencesActive;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ClickMeetingRestClient;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ConferencesInactiveController ;
 
 class DailyQuote extends Command
 {
@@ -132,6 +133,8 @@ class DailyQuote extends Command
             }
         }       
         Log::info('Successfully get meeting '); 
+        Log::info('Wait on'. $czas);
+
     }
         // Setting up a random word
         $key = array_rand($quotes);
@@ -159,10 +162,16 @@ class DailyQuote extends Command
         if ($czas == "03:05"){
             updateClickMetting();
             
+            
         }
-        Log::info('Wait on'. $czas);
-        // $this->info(env('CM_KEY'));
+        $conferencesInactiveController = new ConferencesInactiveController();
+        $conferencesInactiveController->updateClickMetting();
+        $conferencesInactiveController->send_to_SM_visitors_witch_tag();
+
+        // Log::info('Wait on'. $czas);
+        $this->info(env('CM_KEY'));
         // $this->info($czas);
         // Log::info($data);
+        
     }
 }

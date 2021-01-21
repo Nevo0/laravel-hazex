@@ -23,6 +23,9 @@ class SalesmanagoController extends Controller
         if ($event=="awaryjne-oswietlenie-ewakuacyjne-i-zapasowe-a-prawo-i-normy-a") {
           $event= "WEBINAR_ATEX_OSWIETLENIE_PRAWO_UCZESTNIK";
         }
+        if ($event=="wyladowania-elektrostatyczne-jako-przyczyna-wybuchu-jak-sie-chronic") {
+          $event= "WEBINAR_ATEX_WYLADOWANIA_UCZESTNIK";
+        }
         // awaryjne-oswietlenie-ewakuacyjne-i-zapasowe-a-prawo-i-normy-a
         return $event;
         }
@@ -145,7 +148,7 @@ class SalesmanagoController extends Controller
           echo "dodane";
             dump([ $contactIds, $invalidContacts]);
             // write_log($response_json);
-            
+            return "1";
           }
           
         } catch (\Throwable $th) {

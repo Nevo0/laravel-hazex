@@ -5,6 +5,8 @@
  */
 namespace App\Http\Controllers;
 
+use Exception;
+
 
 
 class ClickMeetingRestClient
@@ -59,12 +61,12 @@ class ClickMeetingRestClient
     /**
      * Constructor
      * @param array $params
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(array $params)
     {
         if (false === extension_loaded('curl')) {
-            throw new Exception('The curl extension must be loaded for using this class!');
+            throw new \Exception('The curl extension must be loaded for using this class!');
         }
 
         $this->url = isset($params['url']) ? $params['url'] : $this->url;
@@ -81,7 +83,7 @@ class ClickMeetingRestClient
      * @param array $params
      * @param bool $format_response
      * @param bool $is_upload_file
-     * @throws Exception
+     * @throws \Exception
      * @return string|array
      */
     protected function sendRequest($method, $path, $params = null, $format_response = true, $is_upload_file = false)
@@ -134,14 +136,14 @@ class ClickMeetingRestClient
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         if (isset($this->http_errors[$http_code])) {
-            throw new Exception($response, $http_code);
+            throw new \Exception($response, $http_code);
         } elseif (!in_array($http_code, array(200, 201))) {
-            throw new Exception('Response status code: ' . $http_code);
+            throw new \Exception('Response status code: ' . $http_code);
         }
 
         // check for curl error
         if (0 < curl_errno($curl)) {
-            throw new Exception('Unable to connect to ' . $this->url . ' Error: ' . curl_error($curl));
+            throw new \Exception('Unable to connect to ' . $this->url . ' Error: ' . curl_error($curl));
         }
 
         // close the connection

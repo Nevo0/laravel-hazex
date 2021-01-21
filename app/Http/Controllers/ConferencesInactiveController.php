@@ -15,37 +15,49 @@ class ConferencesInactiveController extends Controller
      */
     public function index()
     {
+        $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
+        $datap['ConferencesActiveAPI'] = $client->conferences('inactive');
+        dump($datap);
+    }
+    public function send_to_SM_visitors_witch_tag()
+    {
         
         $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
   
 
-        $datap['ConferencesInactive'] = ConferencesInactive::orderByDesc('starts_at')->paginate(1);
+        $datap['ConferencesInactive'] = ConferencesInactive::orderByDesc('starts_at')->paginate(4);
         // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toJson();
         $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toArray();
         foreach ($datap['ConferencesInactive']['data'] as $key => $sessions)
         {
             $inactive_id =$sessions['id'];
             $starts_at = date('Y-m-d', strtotime($sessions['starts_at']));
-            dump($starts_at);
+            // dump($starts_at);
             $room_id =$sessions['id_cm'];
             if ($sessions['access_type'] == 1) {
                 // bedziemy zmienac ta wartośc jesli została dodana osoba z sukcesem, aby działało jak na razie 1
-                $datap['sessions'][$key] = $client->conferenceSessions($sessions["id_cm"]);   
-                foreach ($datap['sessions'][$key] as $key2 => $session)
-                    {
-                        $session_id= $session->id;
-                        $visitors=  $this->update2($room_id, $session_id);
-                        $datap['sessions'][$key]['visitors']= $visitors;
-
-                    }
-                
-            }
-            $salesmanagoController = new SalesmanagoController();
-            $salesmanagoController->process_contact_form_sm2($visitors, $sessions['name_url'] ,$starts_at);
-            // echo $salesmanagoController->send_tag_to_sm(1);
-
-            // updateA($inactive_id);
+                if ($sessions['type'] == 0) {
+                  var_dump('wyladowania-elektrostatyczne-jako-przyczyna-wybuchu-jak-sie-chronic');
+                }else{
+                    $datap['sessions'][$key] = $client->conferenceSessions($sessions["id_cm"]);   
+                    foreach ($datap['sessions'][$key] as $key2 => $session)
+                        {
+                            $session_id= $session->id;
+                            $visitors=  $this->update2($room_id, $session_id);
+                            $datap['sessions'][$key]['visitors']= $visitors;
+    
+                        }
+                        $salesmanagoController = new SalesmanagoController();
+                        $sm_r = $salesmanagoController->process_contact_form_sm2($visitors, $sessions['name_url'] ,$starts_at);
+                        // echo $salesmanagoController->send_tag_to_sm(1);
+                        // var_dump($sm_r);
+                        $this->updateA($inactive_id);
+                }
+               
+                }
+            
         }  
+        return;
         // dump($datap);
         // $datap['ConferencesInactive'] = ConferencesInactive::select('id_cm','room_type','room_pin','name','name_url',)->get()->attributesToArray();
         
@@ -180,7 +192,8 @@ class ConferencesInactiveController extends Controller
     public function updateA($id)
     {
         $conferencesInactive = ConferencesInactive::find($id);
-        $conferencesInactive->access_type == 0;
+        $conferencesInactive->access_type = 0;
+        // var_dump($conferencesInactive->access_type);
         $conferencesInactive->save();
     }
     public function unique_multidim_array2($array, $key)
@@ -246,7 +259,7 @@ class ConferencesInactiveController extends Controller
     {
         //
     }
-    public function updateClickMetting(Request $request)
+    public function updateClickMetting()
     {
         $datap=[];
 
