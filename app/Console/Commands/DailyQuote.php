@@ -168,6 +168,7 @@ class DailyQuote extends Command
         
 
         Log::info('Wait on'. $czas);
+        
         Log::info(env('CM_KEY'));
         // $this->info(env('CM_KEY'));
         // $this->info($czas);
