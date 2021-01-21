@@ -32,7 +32,7 @@ class ConferencesInactiveController extends Controller
         {
             $inactive_id =$sessions['id'];
             $starts_at = date('Y-m-d', strtotime($sessions['starts_at']));
-            // dump($starts_at);
+            
             $room_id =$sessions['id_cm'];
             if ($sessions['access_type'] == 1) {
                 // bedziemy zmienac ta wartośc jesli została dodana osoba z sukcesem, aby działało jak na razie 1

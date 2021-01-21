@@ -130,8 +130,9 @@ class DailyQuote extends Command
             $ca->autologin_hash = $conference->autologin_hash;
             $ca->save();
             }
-        }       $czas=date("H:i");    
-        Log::info('Successfully get activ meeting '. $czas); 
+        }      
+        //  $czas=date("H:i");    
+        // Log::info('Successfully get activ meeting '. $czas); 
         // Log::info('Wait on'. $czas);
 
     }
