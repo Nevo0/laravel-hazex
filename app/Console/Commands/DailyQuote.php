@@ -157,6 +157,9 @@ class DailyQuote extends Command
 
         if ($czas == "15:05"){
             updateClickMetting();
+            $conferencesInactiveController = new ConferencesInactiveController();
+            $conferencesInactiveController->updateClickMetting();
+            $conferencesInactiveController->send_to_SM_visitors_witch_tag();
             
         }
         if ($czas == "03:05"){
@@ -168,7 +171,7 @@ class DailyQuote extends Command
         
 
         Log::info('Wait on'. $czas);
-        
+
         Log::info(env('CM_KEY'));
         // $this->info(env('CM_KEY'));
         // $this->info($czas);
