@@ -108,6 +108,7 @@ Route::get('/cm/n', [ConferencesInactiveController::class, 'index']);
 Route::get('/cm/n/{id}', [ConferencesInactiveController::class, 'show'])->name('cn_id');
 Route::get('/cm/check/a', [ConferencesActiveController::class, 'updateClickMetting']);
 Route::get('/cm/check/n', [ConferencesInactiveController::class, 'updateClickMetting']);
+Route::get('/cm/check/sn', [ConferencesInactiveController::class, 'send_to_SM_visitors_witch_tag']);
 
 
 Route::get('/cm/s/createAll', [IinactivesessionController::class, 'createAll']);

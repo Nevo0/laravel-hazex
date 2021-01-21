@@ -130,8 +130,8 @@ class DailyQuote extends Command
             $ca->autologin_hash = $conference->autologin_hash;
             $ca->save();
             }
-        }       
-        Log::info('Successfully get meeting '); 
+        }       $czas=date("H:i");    
+        Log::info('Successfully get activ meeting '. $czas); 
         // Log::info('Wait on'. $czas);
 
     }
@@ -145,16 +145,16 @@ class DailyQuote extends Command
             $conferencesInactiveController = new ConferencesInactiveController();
             $conferencesInactiveController->updateClickMetting();
             $conferencesInactiveController->send_to_SM_visitors_witch_tag();
-            Log::info('update CM, send tag, activ '. $czas);
+            Log::info('updateClickMetting() updateClickMetting() send_to_SM_visitors_witch_tag()'. $czas);
         }
         if ($czas == "11:05"){
             updateClickMetting();
-            Log::info('activ '. $czas);
+            Log::info('updateClickMetting() '. $czas);
             
         }
         if ($czas == "13:05"){
             updateClickMetting();
-            Log::info('activ '. $czas);
+            Log::info('updateClickMetting() '. $czas);
             
         }
 
@@ -163,7 +163,7 @@ class DailyQuote extends Command
             $conferencesInactiveController = new ConferencesInactiveController();
             $conferencesInactiveController->updateClickMetting();
             $conferencesInactiveController->send_to_SM_visitors_witch_tag();
-            Log::info('update CM, send tag, activ '. $czas);
+            Log::info('updateClickMetting() updateClickMetting() send_to_SM_visitors_witch_tag()'. $czas);
             
         }
         if ($czas == "03:05"){
@@ -171,7 +171,7 @@ class DailyQuote extends Command
             $conferencesInactiveController = new ConferencesInactiveController();
             $conferencesInactiveController->updateClickMetting();
             $conferencesInactiveController->send_to_SM_visitors_witch_tag();
-            Log::info('update CM, send tag, activ '. $czas);
+            Log::info('updateClickMetting() updateClickMetting() send_to_SM_visitors_witch_tag()'. $czas);
         }
         
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SalesmanagoController extends Controller
 {
@@ -139,6 +140,7 @@ class SalesmanagoController extends Controller
           if ($err) {
             dump([$err,$json]);
             // write_log($err);
+            Log::info(["if (err)",$err,$json]);
           } else {
             $response_json=json_decode($response);
       
@@ -146,12 +148,14 @@ class SalesmanagoController extends Controller
             $invalidContacts=json_encode($response_json->invalidContacts);
       
           echo "dodane";
-            dump([ $contactIds, $invalidContacts]);
+            // dump([ $contactIds, $invalidContacts]);
+            Log::info([ "response_json",$contactIds, $invalidContacts]);
             // write_log($response_json);
             return "1";
           }
           
         } catch (\Throwable $th) {
+          Log::info(["Throwable",$th]);
           // write_log($th);
         }
         

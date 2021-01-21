@@ -25,7 +25,7 @@ class ConferencesInactiveController extends Controller
         $client = new ClickMeetingRestClient(array('api_key' => env('CM_KEY')));
   
 
-        $datap['ConferencesInactive'] = ConferencesInactive::orderByDesc('starts_at')->paginate(4);
+        $datap['ConferencesInactive'] = ConferencesInactive::orderByDesc('starts_at')->paginate(15);
         // $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toJson();
         $datap['ConferencesInactive'] = $datap['ConferencesInactive']->toArray();
         foreach ($datap['ConferencesInactive']['data'] as $key => $sessions)
