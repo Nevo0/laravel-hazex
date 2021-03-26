@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Log;
 
 class SalesmanagoController extends Controller
 {
-   
-      
-      
+
+
+
       public function tag_send_to_SM($event){
 
         if ($event=="ochrona-urzadzen-i-aparatow-przed-skutkami-wybuchu-pylow") {
@@ -27,11 +27,14 @@ class SalesmanagoController extends Controller
         if ($event=="wyladowania-elektrostatyczne-jako-przyczyna-wybuchu-jak-sie-chronic") {
           $event= "WEBINAR_ATEX_WYLADOWANIA_UCZESTNIK";
         }
+        if ($event=="wyladowania-elektrostatyczne-jako-przyczyna-wybuchu-jak-sie-ochronic") {
+          $event= "WEBINAR_ATEX_WYLADOWANIA_UCZESTNIK";
+        }
         // awaryjne-oswietlenie-ewakuacyjne-i-zapasowe-a-prawo-i-normy-a
         return $event;
         }
 
-     
+
       public function process_contact_form_sm2( $AREQUEST,$url, $data_start ){
           $attend = $AREQUEST;
           // $attend = array("email"=> "pi@pi.pl", "name"=> "Pi", "company"=> "Pi", "phone"=> "555");
@@ -48,30 +51,30 @@ class SalesmanagoController extends Controller
           // "id"=> "46247414",
           // "login"=> "SEAstian GruszKA;Wolff;888",
           // "start_date"=> "2020-07-23T11:03:00+02:00"]);
-         
-      
-      
+
+
+
           $type =gettype($attend);
           $atte=[];
           foreach ($attend as $key => $value) {
-            
+
             if ("action" == $key || 'data' == $key || 'name_url' == $key  ) {
-              
+
               array_push($atte,$key);
               $api_response_bod ='magia2';
-              
+
                 unset($attend[$key]);
-            }  
+            }
           }
           $upsertDetails= [];
         //   array_push($attend,$_REQUEST[0]);
-      
+
           $event=$this->tag_send_to_SM($url);
-          
-      
-         
-            foreach ($attend as $key => $value) { 
-      
+
+
+
+            foreach ($attend as $key => $value) {
+
               $details["email"]= $value['email'];
               // $details["login"]= $value['login'];
               $dataPerson = explode(";", $value['login']);
@@ -83,17 +86,17 @@ class SalesmanagoController extends Controller
               $details["phone"]= isset($dataPerson[2]) ? $dataPerson[2] : "";
               array_push($upsertDetails, $details);
             }
-           
+
           // $upsertDetails= $upsertDetails[0]['email'];
-      
+
           $json2= $this->prepe_json_to_send($upsertDetails, $event, $data_start);
         //   dump($json2);
         //   dump($upsertDetails);
         //   dump($event);
-        
+
         $this->send_tag_to_sm($json2 ,$_REQUEST);
-        
-      
+
+
             // dump([ $_REQUEST,$attend, $upsertDetails,$atte]);
       }
       public function prepe_json_to_send($upsertDetails, $event= "WEBINAR_NIEZNANY" , $data_start= "DATA_NIEZNANA"){
@@ -102,7 +105,7 @@ class SalesmanagoController extends Controller
           $numItems = count($upsertDetails);
           $i = 0;
           foreach($upsertDetails as $key => $value){
-         
+
             $json2 .= '{"newEmail": null,"contact": {"email": "'.$value['email'].'"},"tags": ["'.$event .'_'. $data_start .'","'.$event.'"]}';
              if(!(++$i === $numItems)) {
               $json2 .=',';
@@ -131,35 +134,35 @@ class SalesmanagoController extends Controller
               "content-type: application/json"
             ),
           ));
-          
+
           $response = curl_exec($curl);
           $err = curl_error($curl);
-          
+
           curl_close($curl);
-          
+
           if ($err) {
             dump([$err,$json]);
             // write_log($err);
             Log::info(["if (err)",$err,$json]);
           } else {
             $response_json=json_decode($response);
-      
+
             $contactIds=json_encode($response_json->contactIds);
             $invalidContacts=json_encode($response_json->invalidContacts);
-      
+
           echo "dodane";
             // dump([ $contactIds, $invalidContacts]);
             Log::info([ "response_json",$contactIds, $invalidContacts]);
             // write_log($response_json);
             return "1";
           }
-          
+
         } catch (\Throwable $th) {
           Log::info(["Throwable",$th]);
           // write_log($th);
         }
-        
+
         // dump([$attend,$json]);
-        
+
       }
 }
